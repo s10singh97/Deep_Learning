@@ -4,7 +4,7 @@ Created on Sat Jun 23 12:34:48 2018
 
 @author: SHASHWAT
 """
-
+# Data Preprocessing
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -27,3 +27,23 @@ X_train, y_train = np.array(X_train), np.array(y_train)
 
 # Reshaping
 X_train = np.reshape(X_train, (X_train.shape[0], X_train.shape[1], 1))
+
+# Building RNN
+from keras.models import Sequential
+from keras.layers import LSTM
+from keras.layers import Dropout
+from keras.layers import Dense
+
+regressor = Sequential()
+# First LSTM Layer
+regressor.add(LSTM(units = 50, return_sequences = True, input_shape = (X_train.shape[1], 1)))
+regressor.add(Dropout(0.2))
+# Second LSTM Layer
+regressor.add(LSTM(units = 50, return_sequences = True))
+regressor.add(Dropout(0.2))
+# Third LSTM Layer
+regressor.add(LSTM(units = 50, return_sequences = True))
+regressor.add(Dropout(0.2))
+# Fourth LSTM Layer
+regressor.add(LSTM(units = 50))
+regressor.add(Dropout(0.2))
