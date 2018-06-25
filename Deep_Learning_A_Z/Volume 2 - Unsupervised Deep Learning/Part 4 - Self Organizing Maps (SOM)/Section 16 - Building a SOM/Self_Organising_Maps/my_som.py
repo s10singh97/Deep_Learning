@@ -35,3 +35,8 @@ for i, x in enumerate(X):
     w = som.winner(x)
     plot(w[0] + 0.5, w[1] + 0.5, markers[y[i]], markeredgecolor = colors[y[i]], markerfacecolor = 'None', markersize = 10, markeredgewidth = 2)
 show()
+
+# Catch the Culprits
+mappings = som.win_map(X)
+frauds = np.concatenate((mappings[(4,3)], mappings[(6,3)]), axis = 0)
+frauds = sc.inverse_transform(frauds)
