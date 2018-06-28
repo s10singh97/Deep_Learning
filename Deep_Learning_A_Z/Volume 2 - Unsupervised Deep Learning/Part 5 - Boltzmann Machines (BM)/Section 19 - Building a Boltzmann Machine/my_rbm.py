@@ -27,3 +27,17 @@ test_set = np.array(test_set, dtype = 'int')
 # Getting the numbers of Users and Ratings
 nb_users = int(max(max(training_set[:, 0]), max(test_set[:, 0])))
 nb_movies =  int(max(max(training_set[:, 1]), max(test_set[:, 1])))
+
+# Converting the data into an array with users in lines and movies in columns
+def convert(data):
+    new_data = []
+    for id_users in range(1, nb_users + 1):
+        id_movies = data[:, 1][data[:, 0] == id_users]
+        id_ratings = data[:, 2][data[:, 0] == id_users]
+        ratings = np.zeros(nb_movies)
+        ratings[id_movies - 1] = id_ratings
+        new_data.append(list(ratings))
+    return new_data        
+
+training_set = convert(training_set)
+test_set = convert(test_set)
