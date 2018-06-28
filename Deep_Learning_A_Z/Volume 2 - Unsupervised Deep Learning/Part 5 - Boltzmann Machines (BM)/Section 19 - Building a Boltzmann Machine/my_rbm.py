@@ -21,6 +21,9 @@ ratings = pd.read_csv('ml-1m/ratings.dat', sep = '::', header = None, engine = '
 # Preparing the training set and test test
 training_set = pd.read_csv('ml-100k/u1.base', delimiter = '\t')
 training_set = np.array(training_set, dtype = 'int')
-
 test_set = pd.read_csv('ml-100k/u1.test', delimiter = '\t')
 test_set = np.array(test_set, dtype = 'int')
+
+# Getting the numbers of Users and Ratings
+nb_users = int(max(max(training_set[:, 0]), max(test_set[:, 0])))
+nb_movies =  int(max(max(training_set[:, 1]), max(test_set[:, 1])))
