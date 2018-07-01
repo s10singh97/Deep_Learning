@@ -89,7 +89,7 @@ test_loss = 0
 s = 0.
 for id_user in range(nb_users):
     input = Variable(training_set[id_user]).unsqueeze(0)
-    target = Variable(test_set[id_user])
+    target = Variable(test_set[id_user]).unsqueeze(0)
     if torch.sum(target.data > 0) > 0:
         output = sae(input)
         target.require_grad = False
@@ -98,4 +98,4 @@ for id_user in range(nb_users):
         mean_corrector = nb_movies/float(torch.sum(target.data > 0) + 1e-10)
         test_loss += np.sqrt(loss.data[0]*mean_corrector)
         s += 1.
-print('test_loss: ' + str(test_loss/s))
+print('test loss: '+str(test_loss/s))
