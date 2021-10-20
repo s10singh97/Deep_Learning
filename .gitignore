@@ -110,3 +110,4 @@ venv.bak/
 
 # Zip files
 *.zip
+.Rproj.user
